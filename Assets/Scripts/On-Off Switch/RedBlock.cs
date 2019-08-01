@@ -5,7 +5,6 @@ using UnityEngine;
 public class RedBlock : MonoBehaviour {
 
 	private bool isOn;
-	public SwitchController switchController; 
 	private Collider2D col;
 	private SpriteRenderer spriteR;
 	public Sprite OnSprite;
@@ -21,7 +20,7 @@ public class RedBlock : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		isOn = switchController.isOn;
+		isOn = SwitchController.instance.isOn;
 
 		if (isOn) {
 			col.enabled = true;
