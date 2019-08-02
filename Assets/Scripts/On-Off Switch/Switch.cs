@@ -13,6 +13,8 @@ public class Switch : MonoBehaviour {
 	public SwitchController switchController;
 	AudioSource audio;
 	public AudioClip hit;
+	private bool setOn;
+	private bool setOff;
 
 	// Use this for initialization
 	void Start () {
@@ -21,15 +23,26 @@ public class Switch : MonoBehaviour {
 		anim = child.GetComponent<Animator> ();
 		audio = GetComponent<AudioSource> ();
 		audio.clip = hit;
+		setOn = false;
+		setOff = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		isOn = switchController.isOn;
-		if (isOn) {
-			spriteR.sprite = onSprite;
-		} else if (!isOn) {
-			spriteR.sprite = offSprite;
+		isOn = SwitchController.instance.isOn;
+
+		if (!setOn) {
+			if (isOn) {
+				spriteR.sprite = onSprite;
+				setOn = true;
+				setOff = false;
+			}
+		} if (!setOff) {
+			if (!isOn) {
+				spriteR.sprite = offSprite;
+				setOff = true;
+				setOn = false;
+			}
 		}
 
 	}

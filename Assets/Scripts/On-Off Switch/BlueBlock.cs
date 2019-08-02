@@ -5,33 +5,44 @@ using UnityEngine;
 public class BlueBlock : MonoBehaviour {
 
 	private bool isOn;
-	public SwitchController switchController; 
 	private Collider2D col;
 	private SpriteRenderer spriteR;
 	public Sprite OnSprite;
 	public Sprite OffSprite;
 	private Color semiVisible;
+	private bool setOn;
+	private bool setOff;
 
 	// Use this for initialization
 	void Start () {
 		col = GetComponent<Collider2D>();
 		spriteR = GetComponent<SpriteRenderer> ();
 		semiVisible = new Color(1, 1, 1, 0.5f);
+		setOn = false;
+		setOff = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		isOn = switchController.isOn;
+		isOn = SwitchController.instance.isOn;
 
-		if (!isOn) {
-			col.enabled = true;
-			spriteR.sprite = OnSprite;
-			spriteR.color = Color.white;
+		if (!setOn) {
+			if (!isOn) {
+				col.enabled = true;
+				spriteR.sprite = OnSprite;
+				spriteR.color = Color.white;
+				setOn = true;
+				setOff = false;
+			}
 
-		} else if (isOn) {
-			col.enabled = false;
-			spriteR.sprite = OffSprite;
-			spriteR.color = semiVisible;
+		} if (!setOff) {
+			if (isOn) {
+				col.enabled = false;
+				spriteR.sprite = OffSprite;
+				spriteR.color = semiVisible;
+				setOff = true;
+				setOn = false;
+			}
 		}
 	}
 }
