@@ -32,7 +32,7 @@ public class CoinBlock : MonoBehaviour {
 				if (totalCoins > 0) {
 					spriteAnim.Play ("coinblock_hit");
 					audioS.Play();
-					coinCounter.AddCoin ();
+					coinCounter.AddCoin (1);
 					totalCoins -= 1;
 					if (totalCoins == 0) {
 						GetComponent<Animator> ().enabled = false;
