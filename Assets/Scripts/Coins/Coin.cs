@@ -10,14 +10,19 @@ public class Coin : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.gameObject.tag == "Player") {
-			if (type == Amount.one) {
-				coinCounter.AddCoin ();
-			} else if (type == Amount.ten) {
-				coinCounter.Add10Coins ();
-			} else if (type == Amount.thirty) {
-				coinCounter.Add30Coins ();
-			} else if (type == Amount.fifty) {
-				coinCounter.Add50Coins ();
+			switch(type){
+				case Amount.one:
+					coinCounter.AddCoin(1);
+					break;
+				case Amount.ten:
+					coinCounter.AddCoin(10);
+					break;
+				case Amount.thirty:
+					coinCounter.AddCoin(30);
+					break;
+				case Amount.fifty:
+					coinCounter.AddCoin(50);
+					break;
 			}
 			Destroy (this.gameObject);
 		}
